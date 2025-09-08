@@ -237,87 +237,30 @@ function initCTAButton() {
     const ctaButton = document.querySelector('.cta-button');
     
     if (ctaButton) {
+        // Animation de feedback au clic (le lien s'ouvrira normalement)
         ctaButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Animation de feedback
+            // Animation de feedback visuel
             this.style.transform = 'scale(0.95)';
             this.style.boxShadow = '0 4px 12px rgba(251, 107, 165, 0.4)';
             
             setTimeout(() => {
                 this.style.transform = 'scale(1)';
                 this.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.2)';
-                
-                // Ici, tu peux ajouter la logique de réservation
-                showBookingModal();
             }, 150);
         });
         
         // Animation de pulsation périodique
         setInterval(() => {
             if (!ctaButton.matches(':hover')) {
-                ctaButton.style.animation = 'pulse 0.6s ease-in-out';
+                ctaButton.style.animation = 'bounce 0.6s ease-in-out';
                 setTimeout(() => {
-                    ctaButton.style.animation = '';
+                    ctaButton.style.animation = 'bounce 2s ease-in-out infinite';
                 }, 600);
             }
         }, 5000);
     }
 }
 
-/**
- * Affiche une modal de réservation (placeholder)
- */
-function showBookingModal() {
-    // Animation de confirmation
-    const confirmation = document.createElement('div');
-    confirmation.innerHTML = `
-        <div style="
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #FB6BA5 0%, #F9742F 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            z-index: 10000;
-            text-align: center;
-            animation: fadeInScale 0.5s ease-out;
-        ">
-            <h3 style="margin-bottom: 1rem;">✨ Merci pour ton intérêt ! ✨</h3>
-            <p style="margin-bottom: 1.5rem;">Contacte-nous sur soleiaexperience@gmail.com<br>pour réserver ta place ! 🌟</p>
-            <button onclick="this.parentElement.parentElement.remove()" style="
-                background: white;
-                color: #FB6BA5;
-                border: none;
-                padding: 0.5rem 1.5rem;
-                border-radius: 0.5rem;
-                font-weight: 600;
-                cursor: pointer;
-            ">Fermer</button>
-        </div>
-        <div style="
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-        " onclick="this.parentElement.remove()"></div>
-    `;
-    
-    document.body.appendChild(confirmation);
-    
-    // Auto-fermeture après 5 secondes
-    setTimeout(() => {
-        if (confirmation.parentElement) {
-            confirmation.remove();
-        }
-    }, 5000);
-}
 
 /**
  * Gestion responsive de la navigation
@@ -405,6 +348,5 @@ window.addEventListener('resize', function() {
 
 // Export des fonctions pour usage externe si nécessaire
 window.SoleiaExperience = {
-    showBookingModal,
     resetPageAnimations
 };

@@ -383,6 +383,7 @@ body {
 }
 
 .cta-button {
+  display: inline-block;
   background: var(--gradient-primary);
   color: var(--white);
   border: none;
@@ -395,6 +396,8 @@ body {
   box-shadow: var(--shadow-md);
   margin: var(--spacing-xl) 0;
   animation: bounce 2s ease-in-out infinite;
+  text-decoration: none;
+  text-align: center;
 }
 
 .cta-button:hover {
